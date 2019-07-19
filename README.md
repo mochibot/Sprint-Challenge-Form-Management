@@ -26,13 +26,23 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 
 - [ ] Why are forms used so often in web applications and software?
 
+Forms are used to get input from the users, telling us what we need to know about the user. Forms are also important as they contribute to the overall user experience.
+
 - [ ] What advantages are there by using a forms library like Formik?
+
+Using libraries like Formik helps to simplify handling form state, validation, errors and submission, so that we would not have to write out the components, changeHandlers, submitHandlers, and so on each time. 
 
 - [ ] What is stateful logic?
 
+Stateful logic is logic that is built into a component that usually deals with state in the component.
+
 - [ ] What is a custom hook, and what does it mean to compose hooks together?
 
+Custom hooks allows for extracting component logic into reusable functions. It does not have a specific signature; we can decide what it takes as argument, and what it should return. We can extract the common code between different hooks to make it into a custom hook.
+
 - [ ] Describe the process of retriving a token from a server and using that token in subsequent API calls.
+
+The login endpoint takes the username and password. If the credentials are known, the server response with a JSON web token, which is a string of cryptic text that can be stored in the client using local storage or session storage. The application will then need to add authorization header with the token to every request, in order to be allowed access to the protected resources that require authentication.
 
 ## Project Set Up
 

@@ -9,3 +9,5 @@
 - [ ] What is a custom hook, and what does it mean to compose hooks together?
 
 - [ ] Describe the process of retriving a token from a server and using that token in subsequent API calls.
+
+See answers in README.md
