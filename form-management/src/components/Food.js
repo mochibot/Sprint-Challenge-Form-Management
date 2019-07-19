@@ -2,12 +2,18 @@ import React from 'react';
 
 const Food = (props) => {
   return (
-    <div>
-      <div>Name: {props.food.name}</div>
-      <div>Course: {props.food.course}</div>
-      <div>Technique: {props.food.technique}</div>
-      {props.food.ingredients.map(item => <div key={item}>{item}</div>)}
-    </div>
+    <div className='food-card'>
+      <h3>{props.food.name}</h3>
+      <div className='food-category'>
+        <div>{props.food.course}</div>
+        <div>{props.food.technique}</div>
+      </div>
+      <div>Ingredients:
+        <ul>
+        {props.food.ingredients.map(item => <li key={item}>{item}</li>)}
+        </ul>
+      </div>
+   </div>
   )
 }
 

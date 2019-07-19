@@ -4,7 +4,7 @@ import axios from 'axios';
 import * as Yup from 'yup';
 
 
-const Login = ({ errors, touched, isSubmitting }) => {
+const Register = ({ errors, touched, isSubmitting }) => {
   return (
     <div>
       {isSubmitting && <div>Submitting</div>}
@@ -19,11 +19,11 @@ const Login = ({ errors, touched, isSubmitting }) => {
           <Field type='password' name='password'></Field>
           {touched.password && errors.password && <p className='login-error'>{errors.password}</p>}
         </div>
-        {/*<div className='login-field'>
+        <div className='login-field'>
           <label>Confirm password: </label>
           <Field type='password' name='passwordConfirmation'></Field>
           {touched.passwordConfirmation && errors.passwordConfirmation && <p className='login-error'>{errors.passwordConfirmation}</p>}
-        </div>*/}
+        </div>
         <button disabled={isSubmitting}>Submit</button>
       </Form>
     </div>
@@ -31,19 +31,19 @@ const Login = ({ errors, touched, isSubmitting }) => {
 }
 
 export default withFormik({
-  mapPropsToValues: ({ username, password }) => {
+  mapPropsToValues: ({ username, password, passwordConfirmation }) => {
     return {
       username: username || '',
       password: password || '',
-      //passwordConfirmation: passwordConfirmation || ''
+      passwordConfirmation: passwordConfirmation || ''
     }
   },
   
   validationSchema: Yup.object().shape({
     username: Yup.string().required('Username is required'),
-    password: Yup.string().min(8, 'Password must contain at least 8 characters').required('Password is required'),
-    /*passwordConfirmation: Yup.string().oneOf([Yup.ref('password')], 'Passwords are not the same!')
-    .required('Password confirm is required!')*/
+    password: Yup.string().min(8, 'Password must contain at least 8 characters').matches(/(\d{1,})|([A-Z]{1,})/, 'Must contain at least 1 number or 1 uppercase').required('Password is required'),
+    passwordConfirmation: Yup.string().oneOf([Yup.ref('password')], 'Passwords are not the same!')
+    .required('Password confirm is required!')
   }),
 
   handleSubmit(values, { resetForm, setErrors, setSubmitting, props }) {
@@ -55,11 +55,11 @@ export default withFormik({
         console.log(response);
         if (response.data.error) {
           setErrors({
-            password: response.data.message          
+            username: response.data.message          
           })
         } else {
           props.setToken(response.data.token);
-          //props.setIsLoggedIn(true);
+          props.setIsLoggedIn(true);
           props.history.push('/content');
           resetForm()
         }
@@ -67,9 +67,9 @@ export default withFormik({
       .catch(error => {
         console.log(error.message);
         setErrors({
-          password: 'Username or Password incorrect'
+          username: 'Username or Password incorrect'
         })
         setSubmitting(false);
       })
   }
-})(Login);
+})(Register);

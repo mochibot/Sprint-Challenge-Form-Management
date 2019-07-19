@@ -21,7 +21,7 @@ const FoodList = () => {
   }, [])
 
   return (
-    <div>
+    <div className='food-container'>
       {isLoading && <div>Loading...</div>}
       {foodList.map(item => <Food key={item.name} food={item} />)}
     </div>
